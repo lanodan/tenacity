@@ -11,6 +11,20 @@ defaults:
   run:
     shell: bash
 
+# See https://docs.github.com/en/rest/reference/permissions-required-for-github-apps
+# for information on what these individual permissions represent/control
+permissions:
+  actions: none
+  checks:  none
+  contents: read
+  deployments: none
+  issues: none
+  packages: read
+  pull-requests: none
+  repository-projects: none
+  security-events: none
+  statuses: read
+
 jobs:
 
   skip_test:
@@ -18,16 +32,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: write
-      checks: read
-      contents: read
-      deployments: read
-      issues: read
-      discussions: read
-      packages: read
-      pull-requests: read
-      repository-projects: read
-      security-events: read
-      statuses: read
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
@@ -46,6 +50,8 @@ jobs:
     if: ${{ needs.skip_test.outputs.should_skip != 'true' }}
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    permissions:
+      packages: write
     strategy:
       fail-fast: false
       matrix:
