@@ -255,10 +255,10 @@ jobs:
           ${{ github.workspace }}/vcpkg/vcpkg${{ env.EXE_SUFFIX }}
           ${{ env.VCPKG_CACHE_PATH }}
         key: ${{ matrix.config.id }}-${{ hashFiles('**/vcpkg.json') }}-${{ env.VCPKG_COMMIT }}-${{ github.run_number }}
-        restore-keys: |
-          ${{ matrix.config.id }}-${{ hashFiles(' **/vcpkg.json') }}-${{ env.VCPKG_COMMIT }}-
-          ${{ matrix.config.id }}-${{ hashFiles(' **/vcpkg.json') }}-
-          ${{ matrix.config.id }}-
+        #restore-keys: |
+        #  ${{ matrix.config.id }}-${{ hashFiles(' **/vcpkg.json') }}-${{ env.VCPKG_COMMIT }}-
+        #  ${{ matrix.config.id }}-${{ hashFiles(' **/vcpkg.json') }}-
+        #  ${{ matrix.config.id }}-
 
     - name: "[Linux/macOS] Set up wxWidgets cache"
       uses: actions/cache@v2
